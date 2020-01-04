@@ -18,7 +18,7 @@
 	<div style="padding: 15px;">
 
 		<!-- notification message -->
-		<?php if (isset($_SESSION['success'])) : ?>
+		<?php if (isset($_SESSION['success']) && $_SESSION['success'] != "") : ?>
 			<div class="alert alert-success" style="width: 175px;">
 					<?php
 						echo $_SESSION['success'];

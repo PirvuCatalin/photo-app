@@ -22,7 +22,7 @@
 
 #addNewPhotoForm {
 	position: absolute;
-	margin-left: 10%;
+	margin-left: 7%;
 	margin-right: 75%;
 	margin-top: 15px;
 	border: 10px solid mediumseagreen;
@@ -47,6 +47,10 @@
 	align-items: center;
 	justify-content: center;
 	position: relative;
+}
+
+.imageContainerMine {
+	border: 5px solid red;
 }
 
 .imageContainer:hover .xmark {

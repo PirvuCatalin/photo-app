@@ -98,9 +98,9 @@ if (isset($_POST["upload_photo"])) {
             //Insert image content into database
             $insert = $db->query("INSERT into photos (owner_username, datetime_added, image, imageType) VALUES ('$username', '$dataTime', '$imgContent', '$imageType')");
             if($insert){
-                echo "File uploaded successfully.";
+//                echo "File uploaded successfully.";
             } else{
-                echo "File upload failed, please try again.";
+//                echo "File upload failed, please try again.";
             }
         }
     }
