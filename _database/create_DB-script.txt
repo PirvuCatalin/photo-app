@@ -1,0 +1,27 @@
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `username` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `photos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `owner_username` varchar(100) NOT NULL,
+  `datetime_added` DATETIME NOT NULL,
+  `image` longblob NOT NULL,
+  `imageType` varchar(25) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `photos_likes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `photo_id` int(11) NOT NULL,
+  `liker_username` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `photos_comments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `photo_id` int(11) NOT NULL,
+  `commenter_username` varchar(100) NOT NULL,
+  `datetime_added` DATETIME NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
