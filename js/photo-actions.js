@@ -56,7 +56,7 @@ $('.xmark').click(function(el){
                     type: 'GET',
                     success: function (response) {
                         if(response === "deleted") {
-                            that.parent().parent().remove();
+                            that.parent().parent().parent().remove();
                         }
                     }
                 });
@@ -76,3 +76,60 @@ $('.xmark').click(function(el){
         backdrop: true
     })
 });
+
+$('.newCommentText').bind('input', function(){
+    var that = $(this);
+    var comment = that.val().trim();
+
+    if(comment) {
+        that.parent().find('.commentButton')[0].disabled = false;
+    } else {
+        that.parent().find('.commentButton')[0].disabled = true;
+    }
+
+});
+
+function addComment(el) {
+    var that = $(el);
+    var comment = that.parent().find('.newCommentText').val();
+
+    var commentTrimmed = comment.trim();
+
+    if(commentTrimmed.length > 0) {
+        var photoId = that.data("photo-id");
+        $.ajax({
+            url: "/photoapp/add-comment.php?photoId=" + photoId + "&comment=" + commentTrimmed,
+            type: 'GET',
+            success: function (response) {
+                var json = JSON.parse(response);
+                if(!json.bad) {
+                    that.parent().find('.newCommentText').val("");
+                    that[0].disabled = true;
+                    var test = that.parent().parent().find('.commentsTab .js-addcomment').last();
+
+                    //add new comment
+                    var newComment =  "<div class='photoComment js-addcomment'>";
+                    newComment += "<div class='photoCommentHeader'>";
+                    newComment += "<div class='commentOwner'>" + json.username +  "</div>";
+                    newComment += "<div class='commentDatetime'>" + json.dataTime +  "</div>";
+                    newComment += "</div>";
+                    newComment += "<div class='commentText'>" + json.comment +  "</div>";
+                    newComment += "</div>";
+                    test.after(newComment);
+
+                    if(test.hasClass("js-dummy-comment")) {
+                        //remove dummy "no comments" text
+                        test.remove();
+                    }
+
+                    //scroll down
+                    var objDiv = that.parent().parent().find('.commentsTab')[0];
+                    objDiv.scrollTop = objDiv.scrollHeight;
+                }
+            }
+        });
+    } else {
+        that.parent().find('.newCommentText').val("");
+        that[0].disabled = true;
+    }
+}

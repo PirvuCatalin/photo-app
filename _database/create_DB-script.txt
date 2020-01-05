@@ -23,5 +23,6 @@ CREATE TABLE `photos_comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `photo_id` int(11) NOT NULL,
   `commenter_username` varchar(100) NOT NULL,
-  `datetime_added` DATETIME NOT NULL
+  `datetime_added` DATETIME NOT NULL,
+  `comment` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

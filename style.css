@@ -98,16 +98,97 @@
 	transition: all 0.50s;
 }
 .image-hover-highlight:hover {
-	border: 1px solid gray;
-	filter: brightness(130%);
-	-webkit-filter: brightness(130%);
-	-moz-filter: brightness(130%);
-	-o-filter: brightness(130%);
-	-ms-filter: brightness(130%);
+	border: 3px solid gray;
+	filter: brightness(200%);
+	-webkit-filter: brightness(200%);
+	-moz-filter: brightness(200%);
+	-o-filter: brightness(200%);
+	-ms-filter: brightness(200%);
 	-webkit-transition: all 0.50s;
 	transition: all 0.50s;
 }
 
 .numberOfLikes {
 	margin-left: 5px;
+}
+
+.ownerAndDatetime {
+	text-align-last: right;
+	margin-left: auto;
+	margin-right: 15px;
+}
+
+.photoOwner {
+	color: mediumseagreen;
+	font-weight: bold;
+	font-size: medium;
+}
+
+.photoDatetime {
+	font-size: x-small;
+}
+
+.commentsContainer {
+	position: absolute;
+	margin-left: 70%;
+	width: 300px;
+	height: auto;
+}
+
+.newComment {
+	border: 5px solid mediumseagreen;
+	margin-top: 5px;
+	height: 36px;
+	border-radius: 10px;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+
+.commentsTab {
+	overflow: scroll;
+	border: 10px solid mediumseagreen;
+	border-radius: 10px;
+	max-height: 300px;
+}
+
+.photoComment {
+	margin: 2px;
+	border: 2px solid mediumseagreen;
+	border-radius: 10px;
+}
+
+.photoCommentHeader {
+	display: flex;
+}
+
+.commentOwner {
+	margin-left: 5px;
+	color: mediumseagreen;
+	font-weight: bold;
+}
+
+.commentDatetime {
+	font-size: x-small;
+	margin-right: 5px;
+	margin-left: auto;
+	align-self: center;
+}
+
+.commentText {
+	padding: 5px;
+}
+
+.commentButton {
+	margin-left: 3px;
+	margin-bottom: 2px;
+}
+
+.newCommentText {
+	width: 75%;
+}
+
+.inputImage {
+	margin-top: 5px;
+	width: 190px;
 }

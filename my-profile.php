@@ -11,7 +11,7 @@ if (!isset($_SESSION['username'])) {
 
 <form hidden id="addNewPhotoForm" action="my-profile.php" method="post" enctype="multipart/form-data">
     <b>Select image to upload:</b>
-    <input type="file" name="image" style="margin-top: 5px; width: 190px;"/>
+    <input type="file" name="image" class='inputImage'/>
     <br>
     <input class="btn btn-default center-block" type="submit" name="upload_photo" value="UPLOAD"/>
 </form>
@@ -24,16 +24,21 @@ if (!isset($_SESSION['username'])) {
 <?php
 
 //select only current user's photos
-$query = "select p.id, l.liker_username IS NOT NULL as liked, likes.likes  from photos p left join photos_likes l on p.id = l.photo_id and p.owner_username = l.liker_username inner join (select p.id, COALESCE(l.count, 0) as likes from photos p left join (SELECT count(*) as count, photo_id FROM photos_likes group by photo_id) l on l.photo_id = p.id) likes on likes.id = p.id where p.owner_username = '" . $_SESSION['username'] . "' order by likes.likes desc, p.datetime_added desc";
+$query = "select p.id, p.datetime_added, p.owner_username, l.liker_username IS NOT NULL as liked, likes.likes  from photos p left join photos_likes l on p.id = l.photo_id and p.owner_username = l.liker_username inner join (select p.id, COALESCE(l.count, 0) as likes from photos p left join (SELECT count(*) as count, photo_id FROM photos_likes group by photo_id) l on l.photo_id = p.id) likes on likes.id = p.id where p.owner_username = '" . $_SESSION['username'] . "' order by likes.likes desc, p.datetime_added desc";
 $result = mysqli_query($db, $query) or die("Couldn't retrieve photos ids! <br>" . mysqli_error($db));
 
 //foreach photo, draw it on page
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
     echo "<div class='postContainer'>";
+    echo "<div style='display: flex;'>";
     echo "<div class='imageContainer'>";
     echo "<img class='imageElement' src='photo.php?id=" . $row['id'] . "' alt='Looks like this image is missing or corrupted...'/>";
     echo "<img data-photo-id='" . $row['id'] . "' class='xmark' src='img/xmark.png'/>";
     echo "</div>";
+
+    include('comments.php');
+    echo "</div>";
+
     echo "<div class='socialContainer'>";
     if($row['liked'] == 1) {
         echo "<img class='image-hover-highlight cameraLike' data-photo-id='" . $row['id'] . "'  src='img/camera-like-fill.png'/>";
@@ -43,6 +48,9 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
         echo "<img class='image-hover-highlight cameraDislike' data-photo-id='" . $row['id'] . "'  src='img/camera-like.png'/>";
     }
     echo "<div class='numberOfLikes'>" . $row['likes'] . ($row['likes'] == 1 ? " like" : " likes") . "</div>";
+    echo "<div class='ownerAndDatetime'>";
+    echo "<div class='photoDatetime'>" . $row['datetime_added'] . "</div>";
+    echo "</div>";
     echo "</div>";
     echo "</div>";
 }
