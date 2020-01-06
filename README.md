@@ -13,8 +13,10 @@ Running locally:
 2. Copy this repository to htdocs in a folder named "photoapp"
 (you can exclude .sql scripts from there)
 3. Start the Apache and mySql servers
-4. Head to phpmyadmin and execute the script in file create_DB-script.txt under _database folder
+4. Head to phpmyadmin and execute the script in file photoapp.sql
 5. Login using one of the test accounts
+
+Optional: You can also initialize a fresh database by running the script in file create_DB-script.txt under _database folder.
 ```
 <br></br>
 
