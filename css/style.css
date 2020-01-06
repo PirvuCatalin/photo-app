@@ -3,7 +3,7 @@
 	text-align: center;
 	border: 10px solid mediumseagreen;
 	border-radius: 25px;
-	background-image: url("img/login-background.png");
+	background-image: url("../img/login-background.png");
 	background-position: center;
 }
 
@@ -28,7 +28,7 @@
 	border: 10px solid mediumseagreen;
 	border-radius: 10px;
 	padding: 5px;
-	background-image: url("img/login-background.png");
+	background-image: url("../img/login-background.png");
 	background-position: center;
 }
 
@@ -51,6 +51,19 @@
 
 .imageContainerMine {
 	border: 5px solid red;
+}
+
+.photoComment:hover .xmark-comment {
+	background: transparent;
+	display: block;
+	margin-left: auto;
+	margin-right: 5px;
+	width: 15px;
+	height: auto;
+}
+
+.xmark-comment {
+	display: none;
 }
 
 .imageContainer:hover .xmark {

@@ -104,6 +104,7 @@ if (isset($_POST["upload_photo"])) {
             }
         }
     }
+    unset($_POST["upload_photo"]);
 }
 
 ?>

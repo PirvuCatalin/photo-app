@@ -77,6 +77,44 @@ $('.xmark').click(function(el){
     })
 });
 
+//bind this dynamic as it added dynamically
+$(document).on('click', '.xmark-comment', function(el){
+    var that = $(this);
+    var commentId = that.data("comment-id");
+    bootbox.confirm({
+        message: "Do you really want to delete the comment?",
+        callback: function (result) {
+            if(result) {
+                $.ajax({
+                    url: "/photoapp/delete-comment.php?commentId=" + commentId,
+                    type: 'GET',
+                    success: function (response) {
+                        if(response === "deleted") {
+                            if(that.parent().parent().find('.js-addcomment').length < 2) {
+                                that.parent().after("<div class='text-center js-addcomment js-dummy-comment' style='opacity: 0.5'>No comments available</div>");
+                            }
+                            that.parent().remove();
+                        }
+                    }
+                });
+            }
+        },
+        buttons: {
+            cancel: {
+                label: 'No',
+                className: 'btn-default'
+            },
+            confirm: {
+                label: 'Yes',
+                className: 'btn-danger'
+            }
+        },
+        size: 'small',
+        backdrop: true
+    })
+})
+
+
 $('.newCommentText').bind('input', function(){
     var that = $(this);
     var comment = that.val().trim();
@@ -113,6 +151,7 @@ function addComment(el) {
                     newComment += "<div class='commentOwner'>" + json.username +  "</div>";
                     newComment += "<div class='commentDatetime'>" + json.dataTime +  "</div>";
                     newComment += "</div>";
+                    newComment += "<img data-comment-id='" + json.commentId + "' class='xmark-comment' src='img/xmark.png'/>";
                     newComment += "<div class='commentText'>" + json.comment +  "</div>";
                     newComment += "</div>";
                     test.after(newComment);
